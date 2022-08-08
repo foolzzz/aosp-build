@@ -43,7 +43,7 @@ RUN echo 'export LC_ALL=C' > tmp1 \
  && echo '# prebuilts/misc/linux-x86/ccache/ccache -M 50G' >> tmp1 \
  && echo "export USER=$username" >> tmp1 \
  && echo "" >> tmp1 \
- && cat tmp1 >> ~/.bahsrc \
+ && cat tmp1 >> /root/.bashrc \
  && cat tmp1 >> /home/${username}/.bashrc
 
 
