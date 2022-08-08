@@ -30,18 +30,23 @@ RUN groupadd -g $groupid $username \
 
 
 RUN echo ${username}:admin | chpasswd \
- && echo "${username}  ALL=(ALL)       ALL" >> /etc/sudoers
+ && echo "${username}  ALL=(ALL)  NOPASSWD:ALL" >> /etc/sudoers
 
 RUN chown $userid:$groupid /home/$username/.gitconfig
 
 RUN locale-gen zh_CN.UTF-8 \
- && locale-gen en_US.UTF-8 \
- && echo 'export LC_ALL=C' >> ~/.bashrc \
- && echo 'export LANG="en_US.UTF-8"' >> ~/.bashrc \
- && echo 'export USE_CCACHE=1' >> ~/.bashrc \
- && echo '# prebuilts/misc/linux-x86/ccache/ccache -M 50G' >> ~/.bashrc \
- && echo "export USER=$username" >> ~/.bashrc \
- && echo "" >> ~/.bashrc
+ && locale-gen en_US.UTF-8
+ 
+RUN echo 'export LC_ALL=C' > tmp1 \
+ && echo 'export LANG="en_US.UTF-8"' >> tmp1 \
+ && echo 'export USE_CCACHE=1' >> tmp1 \
+ && echo '# prebuilts/misc/linux-x86/ccache/ccache -M 50G' >> tmp1 \
+ && echo "export USER=$username" >> tmp1 \
+ && echo "" >> tmp1 \
+ && cat tmp1 >> ~/.bahsrc \
+ && cat tmp1 >> /home/${username}/.bashrc
+
+
 
 ENV HOME=/home/$username
 ENV USER=$username
