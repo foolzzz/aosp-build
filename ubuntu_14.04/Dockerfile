@@ -38,7 +38,8 @@ RUN locale-gen zh_CN.UTF-8 \
  && locale-gen en_US.UTF-8 \
  && echo 'export LC_ALL=C' >> ~/.bashrc \
  && echo 'export LANG="en_US.UTF-8"' >> ~/.bashrc \
- && echo 'export USE_CCACHE=1 # prebuilts/misc/linux-x86/ccache/ccache -M 50G' >> ~/.bashrc \
+ && echo 'export USE_CCACHE=1' >> ~/.bashrc \
+ && echo '# prebuilts/misc/linux-x86/ccache/ccache -M 50G' >> ~/.bashrc \
  && echo "export USER=$username" >> ~/.bashrc \
  && echo "" >> ~/.bashrc
 
