@@ -19,14 +19,15 @@ RUN curl -o /usr/local/bin/repo https://storage.googleapis.com/git-repo-download
 
 # install openssl1.0
 RUN apt-get install -y wget libssl-dev
-RUN wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz --no-check-certificate \
-  tar -zxvf openssl-1.1.1q.tar.gz
+RUN wget --no-check-certificate https://www.openssl.org/source/openssl-1.1.1q.tar.gz \
+  && tar -zxvf openssl-1.1.1q.tar.gz
 
 # create user
 RUN groupadd -g $groupid $username \
  && useradd -m -u $userid -g $groupid $username \
  && echo $username >/root/username \
- && echo "export USER="$username >>/home/$username/.gitconfig
+ && echo "" > /home/${username}/.gitconfig
+
 
 RUN echo ${username}:admin | chpasswd \
  && echo "${username}  ALL=(ALL)       ALL" >> /etc/sudoers
@@ -38,6 +39,7 @@ RUN locale-gen zh_CN.UTF-8 \
  && echo 'export LC_ALL=C' >> ~/.bashrc \
  && echo 'export LANG="en_US.UTF-8"' >> ~/.bashrc \
  && echo 'export USE_CCACHE=1 # prebuilts/misc/linux-x86/ccache/ccache -M 50G' >> ~/.bashrc \
+ && echo "export USER=$username" >> ~/.bashrc \
  && echo "" >> ~/.bashrc
 
 ENV HOME=/home/$username
