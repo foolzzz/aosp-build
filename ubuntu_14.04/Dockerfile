@@ -17,6 +17,11 @@ RUN curl -o jdk8.tgz https://android.googlesource.com/platform/prebuilts/jdk/jdk
 RUN curl -o /usr/local/bin/repo https://storage.googleapis.com/git-repo-downloads/repo \
  && chmod a+x /usr/local/bin/repo
 
+# install openssl1.0
+RUN apt-get install wget libssl-dev
+RUN wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz --no-check-certificate \
+  tar -zxvf openssl-1.1.1q.tar.gz
+
 # create user
 RUN groupadd -g $groupid $username \
  && useradd -m -u $userid -g $groupid $username \
