@@ -18,7 +18,7 @@ RUN curl -o /usr/local/bin/repo https://storage.googleapis.com/git-repo-download
  && chmod a+x /usr/local/bin/repo
 
 # install openssl1.0
-RUN apt-get install wget libssl-dev
+RUN apt-get install -y wget libssl-dev
 RUN wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz --no-check-certificate \
   tar -zxvf openssl-1.1.1q.tar.gz
 
@@ -37,6 +37,7 @@ RUN locale-gen zh_CN.UTF-8 \
  && locale-gen en_US.UTF-8 \
  && echo 'export LC_ALL=C' >> ~/.bashrc \
  && echo 'export LANG="en_US.UTF-8"' >> ~/.bashrc \
+ && echo 'export USE_CCACHE=1 # prebuilts/misc/linux-x86/ccache/ccache -M 50G' >> ~/.bashrc \
  && echo "" >> ~/.bashrc
 
 ENV HOME=/home/$username
