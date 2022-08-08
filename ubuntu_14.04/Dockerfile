@@ -24,7 +24,7 @@ RUN groupadd -g $groupid $username \
  && echo "export USER="$username >>/home/$username/.gitconfig
 
 RUN echo ${username}:admin | chpasswd \
- && echo "tom  ALL=(ALL)       ALL" >> /etc/sudoers
+ && echo "${username}  ALL=(ALL)       ALL" >> /etc/sudoers
 
 RUN chown $userid:$groupid /home/$username/.gitconfig
 
