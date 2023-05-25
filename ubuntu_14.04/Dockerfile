@@ -5,7 +5,7 @@ ARG groupid
 ARG username
 
 # ubuntu 14.04
-RUN apt-get update && apt-get install -y git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache libgl1-mesa-dev libxml2-utils xsltproc unzip python openjdk-7-jdk sudo
+RUN apt-get update && apt-get install -y git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache libgl1-mesa-dev libxml2-utils xsltproc unzip python openjdk-7-jdk sudo vim
 
 # install jdk8
 RUN curl -o jdk8.tgz https://android.googlesource.com/platform/prebuilts/jdk/jdk8/+archive/master.tar.gz \
@@ -45,8 +45,6 @@ RUN echo 'export LC_ALL=C' > tmp1 \
  && echo "" >> tmp1 \
  && cat tmp1 >> ~/.bashrc \
  && cat tmp1 >> /home/${username}/.bashrc
-
-
 
 ENV HOME=/home/$username
 ENV USER=$username
